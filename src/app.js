@@ -11,8 +11,10 @@ const usersRouter = require('./users/users-router.js');
 const groupsRouter = require('./groups/groups-router.js');
 const eventsRouter = require('./events/events-router.js');
 const neededRouter = require('./needed/needed-router');
+const photosRouter = require('./photos/photos-router');
+const messagesRouter = require('./messages/messages-router');
+const prayersRouter = require('./prayers/prayers-router');
 const app = express();
-
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
 
 app.use(bodyparser.json());
@@ -24,10 +26,14 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 app.use('/api/users', usersRouter);
+app.use('/api/getUrl', photosRouter);
+
 app.use(isAuth);
 app.use('/api/groups', groupsRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/needed', neededRouter);
+app.use('/api/messages', messagesRouter);
+app.use('/api/prayers', prayersRouter);
 app.use(errorHandler);
 
 module.exports = app;

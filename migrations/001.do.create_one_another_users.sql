@@ -7,6 +7,8 @@ CREATE TABLE one_another_users (
     last_name TEXT,
     user_address TEXT,
     user_bio TEXT,
+    active_user BOOLEAN,
+    profile_pic TEXT,
     UNIQUE (id)
 );
 

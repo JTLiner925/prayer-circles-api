@@ -5,5 +5,5 @@ CREATE TABLE needed_items (
 	item_name text NOT NULL,
 	CONSTRAINT needed_items_pkey PRIMARY KEY (id),
 	CONSTRAINT needed_items_event_id_fkey FOREIGN KEY (event_id) REFERENCES create_event(id) ON DELETE CASCADE,
-	CONSTRAINT needed_items_user_id_fkey FOREIGN KEY (user_id) REFERENCES one_another_users(id)
+	CONSTRAINT needed_items_user_id_fkey FOREIGN KEY (user_id) REFERENCES one_another_users(id) ON DELETE CASCADE
 );

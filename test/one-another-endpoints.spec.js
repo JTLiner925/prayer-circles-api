@@ -42,7 +42,7 @@ describe('oneAnother Endpoints', () => {
       return db.into('one_another_users').insert(testUsers);
     });
 
-    it('responds with 500 Unauthorized for POST /api/users/signup', () => {
+    it('responds with 500 Unauthorized for POST /api/users/register', () => {
       return supertest(app)
         .post('/api/users/')
         .send({
@@ -124,7 +124,7 @@ describe('oneAnother Endpoints', () => {
 
   describe('POST /api/users', () => {
     const testUsers = fixtures.makeUsersArray();
-    it('responds with 400 missing \'email\' if not supplied', () => {
+    it("responds with 400 missing 'email' if not supplied", () => {
       const newUser = {
         id: 4,
         // user_email: 'djmbush@yahoo.com',
@@ -136,16 +136,16 @@ describe('oneAnother Endpoints', () => {
           'I am currently an unemployed ESL teacher living with some friends. I am looking for community and tacos!',
       };
       return supertest(app)
-        .post('/api/users/signup')
+        .post('/api/users/register')
         .send(newUser)
         .expect(400, {
           error: {
-            message: '\'user_email\' is required',
+            message: "'user_email' is required",
           },
         });
     });
 
-    it('responds with 400 missing \'password\' if not supplied', () => {
+    it("responds with 400 missing 'password' if not supplied", () => {
       const newUser = {
         id: 4,
         user_email: 'djmbush@yahoo.com',
@@ -157,16 +157,16 @@ describe('oneAnother Endpoints', () => {
           'I am currently an unemployed ESL teacher living with some friends. I am looking for community and tacos!',
       };
       return supertest(app)
-        .post('/api/users/signup')
+        .post('/api/users/register')
         .send(newUser)
         .expect(400, {
           error: {
-            message: '\'user_password\' is required',
+            message: "'user_password' is required",
           },
         });
     });
 
-    it('responds with 400 missing \'first_name\' if not supplied', () => {
+    it("responds with 400 missing 'first_name' if not supplied", () => {
       const newUser = {
         id: 4,
         user_email: 'djmbush@yahoo.com',
@@ -178,11 +178,11 @@ describe('oneAnother Endpoints', () => {
           'I am currently an unemployed ESL teacher living with some friends. I am looking for community and tacos!',
       };
       return supertest(app)
-        .post('/api/users/signup')
+        .post('/api/users/register')
         .send(newUser)
         .expect(400, {
           error: {
-            message: '\'first_name\' is required',
+            message: "'first_name' is required",
           },
         });
     });

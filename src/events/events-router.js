@@ -67,7 +67,6 @@ eventsRouter.route('/createevent', isAuth).post((req, res, next) => {
     group_event: groupid,
     event_leader: userId,
   };
-
   EventsService.addEvent(knexInstance, eventData)
     .then((event) => {
       if (event) {

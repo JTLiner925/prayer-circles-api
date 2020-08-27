@@ -8,6 +8,7 @@ const groupsRouter = express.Router();
 
 const serializeGroup = (group) => ({
   id: group.id,
+  group_access: group.group_access,
   group_name: xss(group.group_name),
   pitch: xss(group.pitch),
   leader_phone: xss(group.leader_phone),
@@ -16,6 +17,8 @@ const serializeGroup = (group) => ({
   time_date: xss(group.time_date),
   more_info: xss(group.more_info),
   user_ids: group.user_ids,
+  group_pic: group.group_pic,
+
 });
 
 groupsRouter.route('/').get((req, res, next) => {
@@ -47,7 +50,7 @@ groupsRouter.route('/joingroup', isAuth).post((req, res, next) => {
     });
 });
 groupsRouter.route('/creategroup', isAuth).post((req, res, next) => {
-  for (const field of ['leader_phone', 'group_location', 'time_date']) {
+  for (const field of ['group_access','leader_phone', 'group_location', 'time_date']) {
     if (!req.body[field]) {
       logger.error(`${field} is required`);
       return res.status(400).send({
@@ -57,16 +60,19 @@ groupsRouter.route('/creategroup', isAuth).post((req, res, next) => {
   }
   const knexInstance = req.app.get('db');
   const {
+    group_access,
     group_name,
     pitch,
     leader_phone,
     group_location,
     time_date,
     more_info,
+    GroupFileName,
   } = req.body;
   let userId = req.userId;
 
   let groupData = {
+    group_access,
     group_name,
     pitch,
     leader_phone,
@@ -75,6 +81,7 @@ groupsRouter.route('/creategroup', isAuth).post((req, res, next) => {
     more_info,
     group_leader: userId,
     user_ids: `{ ${userId} }`,
+    group_pic: GroupFileName,
   };
 
   GroupsService.addGroup(knexInstance, groupData)
@@ -83,7 +90,7 @@ groupsRouter.route('/creategroup', isAuth).post((req, res, next) => {
         logger.info(`Group with name ${group.group_name} created.`);
         res
           .status(201)
-          .json({ message: `Group with name ${group.group_name} created.` });
+          .json({ message: `Group with name ${group.group_name} created.`, group });
       } else {
         res.status(400).send({
           error: { message: `Missing ${group.field} is required` },

@@ -31,7 +31,7 @@ GET requests:
 
 POST requests:
 - /api/users/login  (user_email, user_password)
-- /api/users/signup  (user_email, user_password, first_name)
+- /api/users/register  (user_email, user_password, first_name)
 - /api/groups/joingroup  (group_name)
 - /api/groups/creategroup  (leader_phone, group_location, time_date, )
 - /api/events/createevent  (event_date, event_time, lesson_title, bible_passage, question)
