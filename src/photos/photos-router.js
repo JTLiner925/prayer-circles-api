@@ -33,9 +33,9 @@ photosRouter.route('/get-photo-url').post((req, res, next) => {
     // ResponseContentDisposition: "attachment;",
   };
   aws.config = {
-    accessKeyId: 'AKIAJKON4ODYPQTLBE2A',
-    secretAccessKey: '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',
-    region: 'us-east-2',
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey,
+    region: region,
   };
   const s3 = new aws.S3();
   // let uploadUrl = s3.getObject(s3Params, (error, data) => {
