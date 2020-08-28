@@ -1,5 +1,6 @@
 const express = require('express');
 const PhotosService = require('./photos-service');
+const { accessKeyId, secretAccessKey, region } = require('../config');
 
 const photosRouter = express.Router();
 
@@ -12,9 +13,9 @@ photosRouter.route('/').post((req, res, next) => {
     ContentType: req.body.type,
   };
   aws.config = {
-    accessKeyId: 'AKIAJKON4ODYPQTLBE2A',
-    secretAccessKey: '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',
-    region: 'us-east-2',
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey,
+    region: region,
   };
   const s3 = new aws.S3();
   let uploadUrl = s3.getSignedUrl('putObject', s3Params);
@@ -46,10 +47,7 @@ photosRouter.route('/get-photo-url').post((req, res, next) => {
   PhotosService.getAllphotos(knexInstance)
     .then((photo) => {
       res.status(200).json({ url: uploadUrl, photo });
-
     })
     .catch(next);
-
-  
 });
 module.exports = photosRouter;

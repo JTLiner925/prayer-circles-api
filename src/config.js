@@ -6,4 +6,7 @@ module.exports = {
   TEST_DB_URL:
     process.env.TEST_DB_URL ||
     'postgresql://postgres@localhost/prayer-circles-test',
+  region: process.env.region,
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
 };
