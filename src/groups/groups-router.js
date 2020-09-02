@@ -50,7 +50,7 @@ groupsRouter.route('/joingroup', isAuth).post((req, res, next) => {
     });
 });
 groupsRouter.route('/creategroup', isAuth).post((req, res, next) => {
-  for (const field of ['group_access','leader_phone', 'group_location', 'time_date']) {
+  for (const field of ['leader_phone', 'group_location', 'time_date']) {
     if (!req.body[field]) {
       logger.error(`${field} is required`);
       return res.status(400).send({
