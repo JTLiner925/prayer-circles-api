@@ -5,7 +5,6 @@ const { accessKeyId, secretAccessKey, region } = require('../config');
 const photosRouter = express.Router();
 
 photosRouter.route('/').post((req, res, next) => {
-  console.log(req.body, 'get url photo');
   const aws = require('aws-sdk');
   var s3Params = {
     Bucket: req.body.location,
@@ -22,7 +21,6 @@ photosRouter.route('/').post((req, res, next) => {
   res.status(200).json({ url: uploadUrl });
 });
 photosRouter.route('/get-photo-url').post((req, res, next) => {
-  console.log(req.body, 'get url photo');
   const knexInstance = req.app.get('db');
   const aws = require('aws-sdk');
   let pic = req.body.fileName;
@@ -38,11 +36,6 @@ photosRouter.route('/get-photo-url').post((req, res, next) => {
     region: region,
   };
   const s3 = new aws.S3();
-  // let uploadUrl = s3.getObject(s3Params, (error, data) => {
-  //   console.log(data);
-
-  //   res.status(200).json({ url: data });
-  // });
   let uploadUrl = s3.getSignedUrl('putObject', s3Params);
   PhotosService.getAllphotos(knexInstance)
     .then((photo) => {

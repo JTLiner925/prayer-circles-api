@@ -30,6 +30,7 @@ eventsRouter.route('/').get((req, res, next) => {
 
 eventsRouter.route('/createevent', isAuth).post((req, res, next) => {
   for (const field of [
+    'groupid',
     'event_date',
     'event_time',
     'lesson_title',

@@ -28,13 +28,25 @@ prayersRouter.route('/', isAuth).get((req, res, next) => {
 
 prayersRouter.route('/send-prayer', isAuth).post((req, res, next) => {
   const knexInstance = req.app.get('db');
+  for (const field of [
+    'groupid',
+    'prayer_body',
+    'prayer_type'
+  ]) {
+    if (!req.body[field]) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: `'${field}' is required` },
+      });
+    }
+  }
   const {
     prayer_type,
     prayer_time,
     prayer_body,
     prayer_like,
     prayer_likes,
-    group_prayer,
+    groupid,
     user_id,
   } = req.body;
   let newPrayerData = {
@@ -43,16 +55,27 @@ prayersRouter.route('/send-prayer', isAuth).post((req, res, next) => {
     prayer_body,
     prayer_like,
     prayer_likes,
-    group_prayer,
+    group_prayer: groupid,
     user_id,
   };
-  console.log(newPrayerData);
+ 
   PrayersService.addPrayer(knexInstance, newPrayerData)
     .then((prayer) => {
-      res.status(201).json({ prayer });
+      if (prayer) {
+        logger.info(`Group with name ${prayer.prayer_body} created.`);
+        res
+          .status(201)
+          .json({ message: `Prayer with name ${prayer.prayer_body} created.`, prayer });
+      } else {
+        res.status(400).send({
+          error: { message: `Missing ${prayer.field} is required` },
+        });
+      }
     })
     .catch((error) => {
-      console.log(error);
+      res.status(500).send({
+        error: { message: error.message },
+      });
     });
 });
 // messagesRouter.route('/update-like', isAuth).post((req, res, next) => {

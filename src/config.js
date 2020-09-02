@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 module.exports = {
   PORT: process.env.PORT || 8000,
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -6,7 +9,7 @@ module.exports = {
   TEST_DB_URL:
     process.env.TEST_DB_URL ||
     'postgresql://postgres@localhost/prayer-circles-test',
-  region: process.env.region,
+  region: process.env.REGION,
   accessKeyId: process.env.accessKeyId,
   secretAccessKey: process.env.secretAccessKey,
 };

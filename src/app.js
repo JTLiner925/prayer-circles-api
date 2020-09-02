@@ -4,7 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
-const { NODE_ENV } = require('./config');
+const { NODE_ENV, region } = require('./config');
 const isAuth = require('./middleware/auth');
 const errorHandler = require('./error-handler');
 const usersRouter = require('./users/users-router.js');
@@ -16,7 +16,6 @@ const messagesRouter = require('./messages/messages-router');
 const prayersRouter = require('./prayers/prayers-router');
 const app = express();
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
-
 app.use(bodyparser.json());
 app.use(morgan(morganOption));
 app.use(cors());

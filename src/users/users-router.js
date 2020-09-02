@@ -70,15 +70,7 @@ usersRouter.route('/login').post((req, res, next) => {
     });
 });
 
-// usersRouter.route('/addPhoto').post((req, res, next) => {
-//   console.log(req.body, 'get url photo');
-//   const aws = require('aws-sdk');
-//   var s3Params = {Bucket: 'user-photo', Key: req.body.name, ContentType: req.body.type};
-//   aws.config = {accessKeyId: 'AKIAJKON4ODYPQTLBE2A', secretAccessKey: '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', region: 'us-east-2'};
-//   const s3 = new aws.S3();
-//   let uploadUrl = s3.getSignedUrl('putObject',s3Params);
-//   res.status(200).json({url: uploadUrl});
-// });
+
 usersRouter.route('/register').post((req, res, next) => {
   for (const field of ['user_email', 'user_password', 'first_name']) {
     if (!req.body[field]) {

@@ -13,12 +13,9 @@ const serializeNeeded = (items) => ({
 });
 neededRouter.route('/', isAuth).get((req, res, next) => {
   const knexInstance = req.app.get('db');
-  // console.log(req.body);
   let eventId = req.body.event_id;
-  // console.log(req.body);
   NeededService.getAllNeeded(knexInstance, eventId)
     .then((items) => {
-      // console.log(items.map(serializeNeeded));
       res.json(items.map(serializeNeeded));
     })
     .catch(next);
