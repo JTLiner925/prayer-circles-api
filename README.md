@@ -1,17 +1,17 @@
-# oneAnother
+# Prayer Circles
 
-## https://oneanother.now.sh/
+## https://prayer-circles.vercel.app/
 
-![](/homepage.png)
+![](/dashboard.png)
 screenshot of the homepage in desktop and mobile version
 
-### oneAnother Client Repo: https://github.com/JTLiner925/oneanother
+### Prayer Circles Client Repo: https://github.com/JTLiner925/prayer-circles
 
-NodeJS/Express/PostgreSQL
+NodeJS/Express/PostgreSQL/AWS
 
-## oneAnother API Overview
+## Prayer Circles API Overview
 
-The oneAnother API provides the database to store the users, groups, and events for oneAnother. 
+The Prayer Circles API provides the database to store the users, groups, and events, prayers, and messages for Prayer Circles. 
 
 ### Authorization
 
@@ -28,12 +28,25 @@ GET requests:
 - /api/users
 - /api/groups
 - /api/events
+- /api/needed
+- /api/prayers
+- /api/messages
+- /api/photos
 
 POST requests:
-- /api/users/login  (user_email, user_password)
-- /api/users/register  (user_email, user_password, first_name)
+- /api/users/login  (user_email, user_password) *No Auth
+- /api/users/register  (user_email, user_password, first_name) *No Auth
 - /api/groups/joingroup  (group_name)
-- /api/groups/creategroup  (leader_phone, group_location, time_date, )
-- /api/events/createevent  (event_date, event_time, lesson_title, bible_passage, question)
-
+- /api/groups/creategroup  (leader_phone, group_location, time_date, ) *Auth Needed
+- /api/events/createevent  (event_date, event_time, lesson_title, bible_passage,  question) *Auth Needed
+- /api/needed *Auth Needed
+- /api/needed/add-item (event_id, item_name) *Auth Needed
+- /api/needed/update-item (user_id, item_name)
+- /api/ *Auth Needed
+- /api/prayers *Auth Needed
+- /api/prayers/send-prayer (group_id, prayer_body, prayer_type) *Auth Needed
+- /api/messages *Auth Needed
+- /api/messages/send-messages (message_body, message_type, group_chat) *Auth Needed
+- /api/getUrl (fileName, location) *Auth Needed
+- /api/getUrl/get-photo-url (name, type, location) *Auth Needed
 These endpoints have many optional body requests, required in parenthesis beside endpoint.
