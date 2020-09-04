@@ -40,15 +40,33 @@ eventsRouter.route('/createevent', isAuth).post((req, res, next) => {
     if (!req.body.groupid) {
       logger.error(`${field} is required`);
       return res.status(400).send({
-        error: { message: 'Must select group' },
+        error: { message: 'Must select GROUP' },
       });
     }
-    // else if (!req.body[field]) {
-    //   logger.error(`${field} is required`);
-    //   return res.status(400).send({
-    //     error: { message: `'${field}' is required` },
-    //   });
-    // }
+    if (!req.body.event_date) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must select DATE' },
+      });
+    }
+    if (!req.body.event_time) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must select TIME' },
+      });
+    }
+    if (!req.body.lesson_title) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must select LESSON TITLE' },
+      });
+    }
+    if (!req.body.bible_passage) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must select BIBLE PASSAGE' },
+      });
+    }
   }
   const knexInstance = req.app.get('db');
   const {

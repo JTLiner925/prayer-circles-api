@@ -30,10 +30,16 @@ usersRouter.route('/').get((req, res, next) => {
 
 usersRouter.route('/login').post((req, res, next) => {
   for (const field of ['user_email', 'user_password']) {
-    if (!req.body[field]) {
+    if (!req.body.user_email) {
       logger.error(`${field} is required`);
       return res.status(400).send({
-        error: { message: `'${field}' is required` },
+        error: { message: 'Must enter EMAIL' },
+      });
+    }
+    if (!req.body.user_password) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must enter PASSWORD' },
       });
     }
   }
@@ -72,11 +78,35 @@ usersRouter.route('/login').post((req, res, next) => {
 
 
 usersRouter.route('/register').post((req, res, next) => {
-  for (const field of ['user_email', 'user_password', 'first_name']) {
-    if (!req.body[field]) {
+  for (const field of ['user_email', 'user_password', 'first_name', 'profile_pic']) {
+    if (!req.body.user_email) {
       logger.error(`${field} is required`);
       return res.status(400).send({
-        error: { message: `'${field}' is required` },
+        error: { message: 'Must enter EMAIL' },
+      });
+    }
+    if (!req.body.user_password) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must enter PASSWORD' },
+      });
+    }
+    if (!req.body.first_name) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must enter FIRST NAME' },
+      });
+    }
+    if (!req.body.user_email) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must enter EMAIL' },
+      });
+    }
+    if (!req.body.profile_pic) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must choose PROFILE PIC' },
       });
     }
   }

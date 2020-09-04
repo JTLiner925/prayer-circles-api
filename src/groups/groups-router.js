@@ -50,11 +50,35 @@ groupsRouter.route('/joingroup', isAuth).post((req, res, next) => {
     });
 });
 groupsRouter.route('/creategroup', isAuth).post((req, res, next) => {
-  for (const field of ['leader_phone', 'group_location', 'time_date']) {
-    if (!req.body[field]) {
+  for (const field of ['leader_phone', 'group_location', 'time_date', 'group_pic']) {
+    if (!req.body.group_location) {
       logger.error(`${field} is required`);
       return res.status(400).send({
-        error: { message: `'${field}' is required` },
+        error: { message: 'Must enter GROUP LOCATION' },
+      });
+    }
+    if (!req.body.leader_phone) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must enter PHONE NUMBER' },
+      });
+    }
+    if (!req.body.time_date) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must enter estimated TIME AND DATE' },
+      });
+    }
+    if (!req.body.user_email) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must enter EMAIL' },
+      });
+    }
+    if (!req.body.group_pic) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must choose GROUP PIC' },
       });
     }
   }

@@ -27,6 +27,23 @@ messagesRouter.route('/', isAuth).get((req, res, next) => {
 });
 
 messagesRouter.route('/send-message', isAuth).post((req, res, next) => {
+  for (const field of [
+    'group_chat',
+    'message_body'
+  ]) {
+    if (!req.body.group_chat) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must select GROUP' },
+      });
+    }
+    if (!req.body.message_body) {
+      logger.error(`${field} is required`);
+      return res.status(400).send({
+        error: { message: 'Must type MESSAGE' },
+      });
+    }
+  }
   const knexInstance = req.app.get('db');
   const {
     message_type,
