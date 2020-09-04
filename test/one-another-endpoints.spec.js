@@ -23,14 +23,14 @@ describe('oneAnother Endpoints', () => {
   after('disconnect from db', () => db.destroy());
 
   before('clean the table', () =>
+  
     db.raw(
-      'TRUNCATE one_another_users, one_another_groups, create_event RESTART IDENTITY CASCADE'
+      'TRUNCATE create_event, needed_items, one_another_groups, one_another_users, RESTART IDENTITY CASCADE'
     )
   );
-
   afterEach('cleanup', () =>
     db.raw(
-      'TRUNCATE one_another_users, one_another_groups, create_event RESTART IDENTITY CASCADE'
+      'TRUNCATE one_another_users, one_another_groups, create_event, needed_items, prayers, messages RESTART IDENTITY CASCADE'
     )
   );
 
@@ -124,7 +124,7 @@ describe('oneAnother Endpoints', () => {
 
   describe('POST /api/users', () => {
     const testUsers = fixtures.makeUsersArray();
-    it("responds with 400 missing 'email' if not supplied", () => {
+    it('responds with 400 missing \'email\' if not supplied', () => {
       const newUser = {
         id: 4,
         // user_email: 'djmbush@yahoo.com',
@@ -140,12 +140,12 @@ describe('oneAnother Endpoints', () => {
         .send(newUser)
         .expect(400, {
           error: {
-            message: "'user_email' is required",
+            message: '\'user_email\' is required',
           },
         });
     });
 
-    it("responds with 400 missing 'password' if not supplied", () => {
+    it('responds with 400 missing \'password\' if not supplied', () => {
       const newUser = {
         id: 4,
         user_email: 'djmbush@yahoo.com',
@@ -161,12 +161,12 @@ describe('oneAnother Endpoints', () => {
         .send(newUser)
         .expect(400, {
           error: {
-            message: "'user_password' is required",
+            message: '\'user_password\' is required',
           },
         });
     });
 
-    it("responds with 400 missing 'first_name' if not supplied", () => {
+    it('responds with 400 missing \'first_name\' if not supplied', () => {
       const newUser = {
         id: 4,
         user_email: 'djmbush@yahoo.com',
@@ -182,7 +182,7 @@ describe('oneAnother Endpoints', () => {
         .send(newUser)
         .expect(400, {
           error: {
-            message: "'first_name' is required",
+            message: '\'first_name\' is required',
           },
         });
     });
