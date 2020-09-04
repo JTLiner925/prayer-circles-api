@@ -37,12 +37,18 @@ eventsRouter.route('/createevent', isAuth).post((req, res, next) => {
     'bible_passage',
     'question'
   ]) {
-    if (!req.body[field]) {
+    if (!req.body.groupid) {
       logger.error(`${field} is required`);
       return res.status(400).send({
-        error: { message: `'${field}' is required` },
+        error: { message: 'Must select group' },
       });
     }
+    // else if (!req.body[field]) {
+    //   logger.error(`${field} is required`);
+    //   return res.status(400).send({
+    //     error: { message: `'${field}' is required` },
+    //   });
+    // }
   }
   const knexInstance = req.app.get('db');
   const {
