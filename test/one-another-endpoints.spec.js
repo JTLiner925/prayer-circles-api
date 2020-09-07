@@ -1,6 +1,6 @@
 const knex = require('knex');
 const expect = require('chai').expect;
-const supertest = require('supertest');
+// const supertest = require('supertest');
 const fixtures = require('./user-fixtures');
 const JWT = require('jsonwebtoken');
 const app = require('../src/app');
@@ -25,12 +25,12 @@ describe('oneAnother Endpoints', () => {
   before('clean the table', () =>
   
     db.raw(
-      'TRUNCATE create_event, needed_items, one_another_groups, one_another_users, RESTART IDENTITY CASCADE'
+      'TRUNCATE one_another_users, one_another_groups, create_event RESTART IDENTITY CASCADE'
     )
   );
   afterEach('cleanup', () =>
     db.raw(
-      'TRUNCATE one_another_users, one_another_groups, create_event, needed_items, prayers, messages RESTART IDENTITY CASCADE'
+      'TRUNCATE one_another_users, one_another_groups, create_event RESTART IDENTITY CASCADE'
     )
   );
 
@@ -124,7 +124,7 @@ describe('oneAnother Endpoints', () => {
 
   describe('POST /api/users', () => {
     const testUsers = fixtures.makeUsersArray();
-    it('responds with 400 missing \'email\' if not supplied', () => {
+    it('Must enter EMAIL', () => {
       const newUser = {
         id: 4,
         // user_email: 'djmbush@yahoo.com',
@@ -140,12 +140,12 @@ describe('oneAnother Endpoints', () => {
         .send(newUser)
         .expect(400, {
           error: {
-            message: '\'user_email\' is required',
+            message: 'Must enter EMAIL',
           },
         });
     });
 
-    it('responds with 400 missing \'password\' if not supplied', () => {
+    it('Must enter PASSWORD', () => {
       const newUser = {
         id: 4,
         user_email: 'djmbush@yahoo.com',
@@ -161,12 +161,12 @@ describe('oneAnother Endpoints', () => {
         .send(newUser)
         .expect(400, {
           error: {
-            message: '\'user_password\' is required',
+            message: 'Must enter PASSWORD',
           },
         });
     });
 
-    it('responds with 400 missing \'first_name\' if not supplied', () => {
+    it('Must enter FIRST NAME', () => {
       const newUser = {
         id: 4,
         user_email: 'djmbush@yahoo.com',
@@ -182,7 +182,7 @@ describe('oneAnother Endpoints', () => {
         .send(newUser)
         .expect(400, {
           error: {
-            message: '\'first_name\' is required',
+            message: 'Must enter FIRST NAME',
           },
         });
     });
@@ -221,6 +221,7 @@ describe('oneAnother Endpoints', () => {
       });
     });
   });
+
   describe('GET /api/events', () => {
     context('Given no events', () => {
       it('responds with 200 and an empty list', () => {
