@@ -1,9 +1,12 @@
 const PrayersService = {
+  //service objects for prayers
+  //get all prayers
   getAllPrayers(knex) {
     return knex.select('*').from('prayers');
   },
 
   addPrayer(knex, newPrayer) {
+    //add prayer
     return knex
       .insert(newPrayer)
       .into('prayers')
@@ -13,14 +16,8 @@ const PrayersService = {
       });
   },
 
-  getByEmail(knex, email) {
-    return knex
-      .from('prayers')
-      .select('*')
-      .where('user_email', email)
-      .first();
-  },
   getById(knex, id) {
+    //get by id
     return knex
       .from('prayers')
       .select('prayer_body', 'prayer_type')
@@ -29,12 +26,14 @@ const PrayersService = {
   },
 
   deletePrayer(knex, id) {
+    //delete prayer
     return knex('prayers')
       .where({ id })
       .delete();
   },
 
   updatePrayer(knex, id, newPrayerLike) {
+    //update prayer
     return knex('prayers')
       .where({ id })
       .update(newPrayerLike);

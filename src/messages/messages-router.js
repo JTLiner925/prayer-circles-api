@@ -17,6 +17,7 @@ const serializeMessage = (message) => ({
   user_id: message.user_id,
 });
 
+//GET all messages 
 messagesRouter.route('/', isAuth).get((req, res, next) => {
   const knexInstance = req.app.get('db');
   MessagesService.getAllMessages(knexInstance)
@@ -25,7 +26,7 @@ messagesRouter.route('/', isAuth).get((req, res, next) => {
     })
     .catch(next);
 });
-
+//POST new message
 messagesRouter.route('/send-message', isAuth).post((req, res, next) => {
   for (const field of [
     'group_chat',
@@ -71,36 +72,5 @@ messagesRouter.route('/send-message', isAuth).post((req, res, next) => {
       console.log(error);
     });
 });
-// messagesRouter.route('/update-like', isAuth).post((req, res, next) => {
-//   const knexInstance = req.app.get('db');
-//   const {
-//     id,
-//     message_type,
-//     message_time,
-//     message_body,
-//     message_like,
-//     message_likes,
-//     group_chat,
-//     user_id,
-//   } = req.body;
-//   let newMessageData = {
-//     id,
-//     message_type,
-//     message_time,
-//     message_body,
-//     message_like,
-//     message_likes,
-//     group_chat,
-//     user_id,
-//   };
-//   let newLike = 
-//   MessagesService.addMessage(knexInstance, id,  newLike)
-//     .then((message) => {
-//       res.status(201).json({ message });
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// });
 
 module.exports = messagesRouter;

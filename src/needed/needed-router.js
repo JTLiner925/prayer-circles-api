@@ -11,6 +11,8 @@ const serializeNeeded = (items) => ({
   user_id: items.user_id,
   item_name: items.item_name,
 });
+
+//GET all needed items
 neededRouter.route('/', isAuth).get((req, res, next) => {
   const knexInstance = req.app.get('db');
   let eventId = req.body.event_id;
@@ -20,6 +22,8 @@ neededRouter.route('/', isAuth).get((req, res, next) => {
     })
     .catch(next);
 });
+
+//POST new needed item
 neededRouter.route('/add-item', isAuth).post((req, res, next) => {
   const knexInstance = req.app.get('db');
 
@@ -31,6 +35,7 @@ neededRouter.route('/add-item', isAuth).post((req, res, next) => {
   res.json({ message: 'Items added successfully' });
 });
 
+//POST - update needed item
 neededRouter.route('/update-item', isAuth).post((req, res, next) => {
   const knexInstance = req.app.get('db');
   const { id, items } = req.body;

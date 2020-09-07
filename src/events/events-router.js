@@ -18,7 +18,7 @@ const serializeEvent = (event) => ({
   event_leader: event.event_leader,
   group_event: event.group_event,
 });
-
+//GET all events 
 eventsRouter.route('/').get((req, res, next) => {
   const knexInstance = req.app.get('db');
   EventsService.getAllEvents(knexInstance)
@@ -28,6 +28,7 @@ eventsRouter.route('/').get((req, res, next) => {
     .catch(next);
 });
 
+//POST new event for specific group
 eventsRouter.route('/createevent', isAuth).post((req, res, next) => {
   for (const field of [
     'groupid',

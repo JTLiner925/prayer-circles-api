@@ -17,6 +17,7 @@ const serializePrayer = (prayer) => ({
   user_id: prayer.user_id,
 });
 
+//GET all prayers
 prayersRouter.route('/', isAuth).get((req, res, next) => {
   const knexInstance = req.app.get('db');
   PrayersService.getAllPrayers(knexInstance)
@@ -26,6 +27,7 @@ prayersRouter.route('/', isAuth).get((req, res, next) => {
     .catch(next);
 });
 
+//POST new prayer
 prayersRouter.route('/send-prayer', isAuth).post((req, res, next) => {
   const knexInstance = req.app.get('db');
   for (const field of [
@@ -78,36 +80,4 @@ prayersRouter.route('/send-prayer', isAuth).post((req, res, next) => {
       });
     });
 });
-// messagesRouter.route('/update-like', isAuth).post((req, res, next) => {
-//   const knexInstance = req.app.get('db');
-//   const {
-//     id,
-//     message_type,
-//     message_time,
-//     message_body,
-//     message_like,
-//     message_likes,
-//     group_chat,
-//     user_id,
-//   } = req.body;
-//   let newMessageData = {
-//     id,
-//     message_type,
-//     message_time,
-//     message_body,
-//     message_like,
-//     message_likes,
-//     group_chat,
-//     user_id,
-//   };
-//   let newLike = 
-//   MessagesService.addMessage(knexInstance, id,  newLike)
-//     .then((message) => {
-//       res.status(201).json({ message });
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// });
-
 module.exports = prayersRouter;

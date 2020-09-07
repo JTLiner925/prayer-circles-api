@@ -28,6 +28,7 @@ usersRouter.route('/').get((req, res, next) => {
     .catch(next);
 });
 
+//POST login user
 usersRouter.route('/login').post((req, res, next) => {
   for (const field of ['user_email', 'user_password']) {
     if (!req.body.user_email) {
@@ -76,7 +77,7 @@ usersRouter.route('/login').post((req, res, next) => {
     });
 });
 
-
+//POST register new user
 usersRouter.route('/register').post((req, res, next) => {
   for (const field of ['user_email', 'user_password', 'first_name', 'profile_pic']) {
     if (!req.body.user_email) {

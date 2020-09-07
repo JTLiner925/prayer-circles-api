@@ -1,13 +1,7 @@
 const knex = require('knex');
-const expect = require('chai').expect;
-// const supertest = require('supertest');
+const supertest = require('supertest');
 const fixtures = require('./user-fixtures');
-const JWT = require('jsonwebtoken');
 const app = require('../src/app');
-const secret = 'NeverShareYourSecret';
-const validator = require('email-validator');
-
-const auth = require('../src/middleware/auth');
 
 describe('oneAnother Endpoints', () => {
   let db;

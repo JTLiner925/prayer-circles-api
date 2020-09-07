@@ -8,8 +8,6 @@ function makeUsersArray() {
       last_name: 'Liner',
       user_address: '309 Tallwood Dr',
       user_bio: 'Man, this is a really long story, how much time do you have?',
-      // active_user: null,
-      // profile_pic: 'thinkful.png'
     },
     {
       id: 2,
@@ -19,8 +17,6 @@ function makeUsersArray() {
       last_name: 'Liner',
       user_address: '309 Tallwood Dr',
       user_bio: 'I love to smile!',
-      // active_user: null,
-      // profile_pic: 'group-event-chat.png'
     },
     {
       id: 3,
@@ -30,8 +26,6 @@ function makeUsersArray() {
       last_name: 'Smith',
       user_address: '30216 St Andrews Dr',
       user_bio: 'A really cool guy',
-      // active_user: null,
-      // profile_pic: 'IMG_2404.jpeg'
     },
   ];
 }
@@ -40,7 +34,6 @@ function makeGroupsArray() {
   return [
     {
       id: 1,
-      // group_access: null,
       group_name: 'Dirt',
       pitch: 'Things get messy',
       leader_phone: '5557659999',
@@ -49,13 +42,10 @@ function makeGroupsArray() {
       time_date: 'friday at 5pm',
       more_info: 'nothing here',
       user_ids: ['1'],
-      // pending_users: null,
-      // group_pic: null,
     },
     {
       id: 2,
       group_name: 'Water',
-      // group_access: null,
       pitch: 'slippery',
       leader_phone: '8889872323',
       group_leader: null,
@@ -63,13 +53,10 @@ function makeGroupsArray() {
       time_date: 'monday at 2pm',
       more_info: 'slip and slide',
       user_ids: ['2'],
-      // pending_users: null,
-      // group_pic: null,
     },
     {
       id: 3,
       group_name: 'Fire',
-      // group_access: null,
       pitch: 'White Hot',
       leader_phone: '3425436789',
       group_leader: null,
@@ -77,8 +64,6 @@ function makeGroupsArray() {
       time_date: '7pm on Wednesday',
       more_info: 'No slide down the fire pole',
       user_ids: ['3'],
-      // pending_users: null,
-      // group_pic: 'a-team',
     },
   ];
 }

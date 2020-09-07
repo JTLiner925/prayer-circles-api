@@ -21,6 +21,7 @@ const serializeGroup = (group) => ({
 
 });
 
+//GET all groups
 groupsRouter.route('/').get((req, res, next) => {
   const knexInstance = req.app.get('db');
   GroupsService.getAllGroups(knexInstance)
@@ -29,6 +30,7 @@ groupsRouter.route('/').get((req, res, next) => {
     })
     .catch(next);
 });
+//POST to join existing group
 groupsRouter.route('/joingroup', isAuth).post((req, res, next) => {
   const knexInstance = req.app.get('db');
   const { group_name, user_ids } = req.body;
@@ -49,6 +51,7 @@ groupsRouter.route('/joingroup', isAuth).post((req, res, next) => {
       console.log(error);
     });
 });
+//POST new group
 groupsRouter.route('/creategroup', isAuth).post((req, res, next) => {
   for (const field of ['leader_phone', 'group_location', 'time_date', 'GroupFileName']) {
     if (!req.body.group_location) {
