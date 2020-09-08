@@ -50,7 +50,6 @@ usersRouter.route('/login').post((req, res, next) => {
   let loadedUser;
   UsersService.getByEmail(knexInstance, user_email)
     .then((user) => {
-      console.log(user)
       if(!user){
         throw new Error('Email not found');
       }
@@ -75,7 +74,6 @@ usersRouter.route('/login').post((req, res, next) => {
       }
     })
     .catch((error) => {
-      console.log(error.message)
       res.status(500).send({
         error: { message: error.message },
       });
