@@ -50,6 +50,10 @@ usersRouter.route('/login').post((req, res, next) => {
   let loadedUser;
   UsersService.getByEmail(knexInstance, user_email)
     .then((user) => {
+      console.log(user)
+      if(!user){
+        throw new Error('Email not found');
+      }
       loadedUser = user;
       return bcrypt.compare(user_password, user.user_password);
     })
@@ -71,6 +75,7 @@ usersRouter.route('/login').post((req, res, next) => {
       }
     })
     .catch((error) => {
+      console.log(error.message)
       res.status(500).send({
         error: { message: error.message },
       });
@@ -79,7 +84,7 @@ usersRouter.route('/login').post((req, res, next) => {
 
 //POST register new user
 usersRouter.route('/register').post((req, res, next) => {
-  for (const field of ['user_email', 'user_password', 'first_name', 'profile_pic']) {
+  for (const field of ['user_email', 'user_password', 'first_name', 'profilePic']) {
     if (!req.body.user_email) {
       logger.error(`${field} is required`);
       return res.status(400).send({
@@ -98,13 +103,8 @@ usersRouter.route('/register').post((req, res, next) => {
         error: { message: 'Must enter FIRST NAME' },
       });
     }
-    if (!req.body.user_email) {
-      logger.error(`${field} is required`);
-      return res.status(400).send({
-        error: { message: 'Must enter EMAIL' },
-      });
-    }
-    if (!req.body.profile_pic) {
+  
+    if (!req.body.profilePic) {
       logger.error(`${field} is required`);
       return res.status(400).send({
         error: { message: 'Must choose PROFILE PIC' },

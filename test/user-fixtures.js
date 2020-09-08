@@ -122,8 +122,78 @@ function makeEventsArray() {
     },
   ];
 }
+function makeMessagesArray() {
+  return [
+    {
+      id: 1,
+      message_time: '2020-09-10T13:46:52.000Z',
+      message_type: 'text',
+      message_body: 'how are you',
+      message_like: null,
+      message_likes: null,
+      group_chat: null,
+      user_id: null,
+    },
+    {
+      id: 2,
+      message_time: '2020-09-18T10:46:52.000Z',
+      message_type: 'text',
+      message_body: 'good, just hanging out',
+      message_like: null,
+      message_likes: null,
+      group_chat: null,
+      user_id: null,
+    },
+    {
+      id: 3,
+      message_time: '2020-09-30T20:46:52.000Z',
+      message_type: 'text',
+      message_body: 'what are you doing today?',
+      message_like: null,
+      message_likes: null,
+      group_chat: null,
+      user_id: null,
+    },
+  ];
+}
+function makePrayersArray() {
+  return [
+    {
+      id: 1,
+      prayer_time: '2020-09-10T13:46:52.000Z',
+      prayer_type: 'text',
+      prayer_body: 'how are you',
+      prayer_like: null,
+      prayer_likes: null,
+      group_prayer: null,
+      user_id: null,
+    },
+    {
+      id: 2,
+      prayer_time: '2020-09-18T10:46:52.000Z',
+      prayer_type: 'text',
+      prayer_body: 'good, just hanging out',
+      prayer_like: null,
+      prayer_likes: null,
+      group_prayer: null,
+      user_id: null,
+    },
+    {
+      id: 3,
+      prayer_time: '2020-09-30T20:46:52.000Z',
+      prayer_type: 'text',
+      prayer_body: 'what are you doing today?',
+      prayer_like: null,
+      prayer_likes: null,
+      group_prayer: null,
+      user_id: null,
+    },
+  ];
+}
 module.exports = {
   makeUsersArray,
   makeGroupsArray,
   makeEventsArray,
+  makeMessagesArray,
+  makePrayersArray
 };

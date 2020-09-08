@@ -19,12 +19,12 @@ describe('oneAnother Endpoints', () => {
   before('clean the table', () =>
   
     db.raw(
-      'TRUNCATE one_another_users, one_another_groups, create_event RESTART IDENTITY CASCADE'
+      'TRUNCATE one_another_users, one_another_groups, create_event, messages, prayers RESTART IDENTITY CASCADE'
     )
   );
   afterEach('cleanup', () =>
     db.raw(
-      'TRUNCATE one_another_users, one_another_groups, create_event RESTART IDENTITY CASCADE'
+      'TRUNCATE one_another_users, one_another_groups, create_event, messages, prayers RESTART IDENTITY CASCADE'
     )
   );
 
@@ -32,6 +32,7 @@ describe('oneAnother Endpoints', () => {
     const testUsers = fixtures.makeUsersArray();
     const testGroups = fixtures.makeGroupsArray();
     const testEvents = fixtures.makeEventsArray();
+    
     beforeEach('insert user', () => {
       return db.into('one_another_users').insert(testUsers);
     });
@@ -249,4 +250,74 @@ describe('oneAnother Endpoints', () => {
       });
     });
   });
+
+  describe('GET /api/messages', () => {
+    context('Given no messages', () => {
+      it('responds with 200 and an empty list', () => {
+        return supertest(app)
+          .get('/api/messages')
+          .set(
+            'Authorization',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoianRsaW5lcjkyNUBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNTk0MzM2NjczfQ.oZ-0VaXYxOPWcO4N-DHxBvEhWQMYOjrYc9yd9QqV6bM'
+          )
+          .expect(200, []);
+      });
+    });
+
+    describe('GET /api/messages', () => {
+      context('Given there are messages in the database', () => {
+        const testMessages = fixtures.makeMessagesArray();
+
+        beforeEach('insert message', () => {
+          return db.into('messages').insert(testMessages);
+        });
+
+        it('responds with 200 and all of the messages', () => {
+          return supertest(app)
+            .get('/api/messages')
+            .set(
+              'Authorization',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoianRsaW5lcjkyNUBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNTk0MzM2NjczfQ.oZ-0VaXYxOPWcO4N-DHxBvEhWQMYOjrYc9yd9QqV6bM'
+            )
+            .expect(200, testMessages);
+        });
+      });
+    });
+  });
+
+  describe('GET /api/prayers', () => {
+    context('Given no prayers', () => {
+      it('responds with 200 and an empty list', () => {
+        return supertest(app)
+          .get('/api/prayers')
+          .set(
+            'Authorization',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoianRsaW5lcjkyNUBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNTk0MzM2NjczfQ.oZ-0VaXYxOPWcO4N-DHxBvEhWQMYOjrYc9yd9QqV6bM'
+          )
+          .expect(200, []);
+      });
+    });
+
+    describe('GET /api/prayers', () => {
+      context('Given there are prayers in the database', () => {
+        const testPrayers = fixtures.makePrayersArray();
+
+
+        beforeEach('insert prayers', () => {
+          return db.into('prayers').insert(testPrayers);
+        });
+
+        it('responds with 200 and all of the prayers', () => {
+          return supertest(app)
+            .get('/api/prayers')
+            .set(
+              'Authorization',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoianRsaW5lcjkyNUBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNTk0MzM2NjczfQ.oZ-0VaXYxOPWcO4N-DHxBvEhWQMYOjrYc9yd9QqV6bM'
+            )
+            .expect(200, testPrayers);
+        });
+      });
+    });
+  });
+
 });
