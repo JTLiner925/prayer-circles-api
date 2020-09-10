@@ -82,7 +82,7 @@ usersRouter.route('/login').post((req, res, next) => {
 
 //POST register new user
 usersRouter.route('/register').post((req, res, next) => {
-  for (const field of ['user_email', 'user_password', 'first_name', 'profilePic']) {
+  for (const field of ['user_email', 'user_password', 'first_name']) {
     if (!req.body.user_email) {
       logger.error(`${field} is required`);
       return res.status(400).send({
@@ -102,12 +102,12 @@ usersRouter.route('/register').post((req, res, next) => {
       });
     }
   
-    if (!req.body.profilePic) {
-      logger.error(`${field} is required`);
-      return res.status(400).send({
-        error: { message: 'Must choose PROFILE PIC' },
-      });
-    }
+    // if (!req.body.profilePic) {
+    //   logger.error(`${field} is required`);
+    //   return res.status(400).send({
+    //     error: { message: 'Must choose PROFILE PIC' },
+    //   });
+    // }
   }
 
   const knexInstance = req.app.get('db');
